@@ -5,13 +5,25 @@ import GoalInput from "./components/GoalInput";
 
 export default function App() {
 
-    const [listGoalState, setListGoalState] = useState([])
+    const [listGoalState, setListGoalState] = useState([
+        {text: "1", id: Math.random().toString()},
+        {text: "2", id: Math.random().toString()},
+        {text: "3", id: Math.random().toString()},
+        {text: "4", id: Math.random().toString()},
+        {text: "5", id: Math.random().toString()},
+    ])
 
     function addGoalHandler(goalText) {
         setListGoalState(currentCourseGoals => [...currentCourseGoals, {
             text: goalText,
             id: Math.random().toString()
         }])
+    }
+
+    function deleteGoalHandler(id) {
+        setListGoalState(current => {
+            return current.filter(goal => goal.id !== id);
+        })
     }
 
     return (
@@ -23,7 +35,7 @@ export default function App() {
                     keyExtractor={(item, index) => item.id}
                     renderItem={itemData => {
                         return (
-                            <GoalItem item={itemData.item}/>
+                            <GoalItem item={itemData.item} onDeleteItem={deleteGoalHandler}/>
                         )
                     }}
                 />
