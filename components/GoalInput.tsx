@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import {Button, StyleSheet, TextInput, View} from 'react-native';
+import {Button, Modal, StyleSheet, TextInput, View} from 'react-native';
 
 interface GoalInputProps {
     onAddGoal: (text: string) => void
+    visible: boolean
 }
 
 export default function GoalInput(props: GoalInputProps) {
@@ -16,6 +17,7 @@ export default function GoalInput(props: GoalInputProps) {
     }
 
     return (
+        <Modal visible={props.visible} animationType={"slide"}>
             <View style={styles.inputContainer}>
                 <TextInput
                     style={styles.textInput}
@@ -25,6 +27,7 @@ export default function GoalInput(props: GoalInputProps) {
                 />
                 <Button title={"Add Goal"} onPress={addGoalText}/>
             </View>
+        </Modal>
     );
 }
 

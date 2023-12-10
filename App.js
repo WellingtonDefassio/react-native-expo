@@ -13,6 +13,13 @@ export default function App() {
         {text: "5", id: Math.random().toString()},
     ])
 
+    const [modalIsVisible, setModalIsVisible] = useState(false)
+
+
+    function startAddGoalHandler() {
+        setModalIsVisible(true)
+    }
+
     function addGoalHandler(goalText) {
         setListGoalState(currentCourseGoals => [...currentCourseGoals, {
             text: goalText,
@@ -28,7 +35,8 @@ export default function App() {
 
     return (
         <View style={styles.appContainer}>
-            <GoalInput onAddGoal={addGoalHandler}/>
+            <Button title={"Add New Goal"} color={"#5e0acc"} onPress={startAddGoalHandler}/>
+            <GoalInput onAddGoal={addGoalHandler} visible={modalIsVisible}/>
             <View style={styles.goalsContainer}>
                 <FlatList
                     data={listGoalState}
